@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	
+	<title>STANly :: Personal Dashboard</title>
+
+	<meta name="viewport" content="width=device-width">
+
+	<link href="./css/style.css" rel="stylesheet" type="text/css">
+	<link href="./js/d3/src/nv.d3.css" rel="stylesheet" type="text/css">
+
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
+	<script type="text/javascript" src="./js/arcadia.js"></script>
+	<script type="text/javascript" src="./js/aGraph.js"></script>
+	<script type="text/javascript" src="./js/d3/lib/d3.v2.js"></script>
+	<script type="text/javascript" src="./js/d3/nv.d3.js"></script>
+	<script type="text/javascript" src="./js/d3/src/models/pie.js"></script>
+</head>
+
+<body>
+<div id="container" class="dashboard">
+	<div id="header-container">
+		<div id="sliverLine"></div>
+		<div id="header">
+			<div id="logoBox" class="img"></div>
+			<div id="rightBox">
+				<div id="user-container">
+					<div id="userBox">
+						<div class="circle_wrapper"><img src="http://profile.ak.fbcdn.net/hprofile-ak-ash3/27350_100001314106197_1542605533_q.jpg"></div>
+						<div class="userName">An Jeungwon</div>
+					</div>
+					<div id="userInfoIcon" class="img"></div>
+				</div>
+				<!--user-container fin-->
+			</div>
+		</div>
+		<!--header fin-->
+	</div>
+	<!--header-container fin-->
+
+	<div id="content-container">
+		<div id="sidebar-container">
+			<div id="sidebar">
+				<div id="projectMenu">
+					<ol>
+						<li class="icon"></li>
+						<li class="text">PROJECT</li>
+					</ol>
+				</div>
+				<div id="noneMenu"></div>
+				<div id="dashboardMenu">
+					<div class="shadow"></div>
+					<ol>
+						<li class="icon"></li>
+						<li class="text">DASHBOARD</li>
+					</ol>
+					<div class="bottom"></div>
+				</div>
+				<div id="compositionMenu">
+					<ol>
+						<li class="icon"></li>
+						<li class="text">COMPOSITION</li>
+					</ol>
+				</div>
+				<div id="pollutionMenu">
+					<ol>
+						<li class="icon"></li>
+						<li class="text">POLLUTION</li>
+					</ol>
+				</div>
+			</div>
+			<!--sidebar fin-->
+		</div>
+		<div id="content">
+			<div id="content-line"></div>
+			<div id="content-inverted-circle"></div>
+			<div id="overview">
+				<div class="text">Overview</div>
+				<ol>
+					<li class="pollution-graph"></li>
+					<script type="text/javascript">
+						makeAGraph([
+							{ name: "6/16", value: 19 },
+							{ name: "6/18", value: 35 },
+							{ name: "6/20", value: 13 },
+							{ name: "6/22", value: 17 },
+							{ name: "6/24", value: 30 },
+						]);
+					</script>
+					<!--pollution-graph fin-->
+					<li class="project-pollution">
+						<svg id="project-pol"></svg>
+						<div id="pollution-container">
+							<div id="pollution-left">
+								<div class="top">12</div>
+								<div class="bottom">Total Projects</div>
+							</div>
+							<div id="pollution-right">
+								<div class="list-item">
+									<div class="icon" style="background-color:#de6264;"></div>
+									<div class="name">STANly</div>
+								</div>
+								<div class="list-spliter"></div>
+								<div class="list-item">
+									<div class="icon" style="background-color:#5a9ccc;"></div>
+									<div class="name">Curing</div>
+								</div>
+								<div class="list-spliter"></div>
+								<div class="list-item">
+									<div class="icon" style="background-color:#72c380;"></div>
+									<div class="name">DynamicWAVE</div>
+								</div>
+								<div class="list-spliter"></div>
+								<div class="list-item">
+									<div class="icon" style="background-color:#cccdc7;"></div>
+									<div class="name">Others</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<script type="text/javascript">
+					function exampleData() {
+						return [{
+							key: "Cumulative Return",
+							values: [
+								{
+									"label" : "CDS / Options",
+									"value" : 29.765957771107
+								},
+								{
+									"label" : "Cash",
+									"value" : 0
+								},
+								{
+									"label" : "Corporate Bonds",
+									"value" : 32.807804682612
+								},
+								{
+									"label" : "Equity",
+									"value" : 196.45946739256
+								},
+								{
+									"label" : "Index Futures",
+									"value" : 0.19434030906893
+								},
+								{
+									"label" : "Options",
+									"value" : 98.079782601442
+								},
+								{
+									"label" : "Preferred",
+									"value" : 13.925743130903
+								},
+								{
+									"label" : "Not Available",
+									"value" : 5.1387322875705
+								}
+							]
+						}];
+					}
+					nv.addGraph(function(){
+						var chart = nv.models.pie()
+							.values(function(d) { return d })
+							.width(115)
+							.height(115)
+							.color([ "#de6363", "#5a9ccc", "#72c380", "#cccdc7", "#9d61dd", "#6371dc", "#dca763", "#a96f6e", "#6fa79a", "#737270" ])
+							.donut(true)
+							.donutRatio(0.61);
+
+						d3.select("#project-pol")
+							.datum([[
+								{ 
+								  key: "One",
+								  y: 5.5
+								},
+								{ 
+								  key: "Two",
+								  y: 3
+								},
+								{ 
+								  key: "Three",
+								  y: 2.5
+								},
+								{ 
+								  key: "Four",
+								  y: 1.5
+								},
+							 ]])
+							.transition().duration(1200)
+							.attr('width', 115)
+							.attr('height', 115)
+							.call(chart);
+
+						return chart;
+					});
+					</script>
+					<!--project-pollution fin-->
+				</ol>
+				<div id="triangleS"></div>
+				<div id="triangleE"></div>
+			</div>
+
+			<!--overview fin-->
+			<div id="main">
+				<div id="project-list-head">
+					<div id="my-project">My Projects</div>
+					<div id="add-project">
+						<div class="icon"></div>
+						<div class="text">Add Project</div>
+					</div>
+				</div>
+				<!--project-list-head fin -->
+				<div id="project-list">
+					<div name="Stanly" class="list-item">
+						<div class="pollution a-circle">
+							<div class="rotation-circle"><div class="text">A</div></div>
+						</div>
+						<div class="slider"></div>
+						<div class="info">
+							<div class="project-name">Stanly</div>
+							<div class="project-date">April 2013 - May 2013 <span class="normal">(1 month ago)</span></div>
+						</div>
+						<div class="basicrule right a-rate">
+							<div class="box">
+								<div class="c1"></div><div class="c2"></div><div class="c3"></div><div class="c4"></div>
+							</div>
+							<div class="rate">A</div>
+							<div class="text">BASIC RULE</div>
+						</div>
+						<div class="sliderr"></div>
+						<div class="naming b-rate">
+							<div class="donut"><div class="rate">B</div></div>
+							<div class="text">NAMING</div>
+						</div>
+						<div class="sliderr"></div>
+						<div class="coupling c-rate">
+							<div class="thread"></div>
+							<div class="text">COUPLING</div>
+						</div>
+						<div class="sliderr"></div>
+						<div class="fat f-rate">
+							<div class="wide"><div class="rate">F</div></div>
+							<div class="text">FAT</div>
+						</div>
+						<div class="sliderr"></div>
+						
+					</div>
+					<!--stanly fin-->
+					<div name="Curing" class="list-item">
+						<div class="pollution c-circle">
+							<div class="rotation-circle"><div class="text">C</div></div>
+						</div>
+						<div class="slider"></div>
+						<div class="info">
+							<div class="project-name">Curing</div>
+							<div class="project-date">Jan 2011 - Jan 2012 <span class="very-old">(1 year ago)</span></div>
+						</div>
+						<div class="basicrule right c-rate">
+							<div class="box">
+								<div class="c1"></div><div class="c2"></div><div class="c3"></div><div class="c4"></div>
+							</div>
+							<div class="rate">C</div>
+							<div class="text">BASIC RULE</div>
+						</div>
+						<div class="sliderr"></div>
+						<div class="naming a-rate">
+							<div class="donut"><div class="rate">A</div></div>
+							<div class="text">NAMING</div>
+						</div>
+						<div class="sliderr"></div>
+						<div class="coupling f-rate">
+							<div class="thread"></div>
+							<div class="text">COUPLING</div>
+						</div>
+						<div class="sliderr"></div>
+						<div class="fat b-rate">
+							<div class="wide"><div class="rate">B</div></div>
+							<div class="text">FAT</div>
+						</div>
+						<div class="sliderr"></div>
+					</div>
+					<!--curing fin-->
+					<div name="DynamicWAVE" class="list-item">
+						<div class="pollution f-circle">
+							<div class="rotation-circle"><div class="text">F</div></div>
+						</div>
+						<div class="slider"></div>
+						<div class="info">
+							<div class="project-name">DynamicWAVE</div>
+							<div class="project-date">Sep 2010 - March 2012 <span class="old">(3 months ago)</span></div>
+						</div>
+						<div class="basicrule right f-rate">
+							<div class="box">
+								<div class="c1"></div><div class="c2"></div><div class="c3"></div><div class="c4"></div>
+							</div>
+							<div class="rate">F</div>
+							<div class="text">BASIC RULE</div>
+						</div>
+						<div class="sliderr"></div>
+						<div class="naming c-rate">
+							<div class="donut"><div class="rate">C</div></div>
+							<div class="text">NAMING</div>
+						</div>
+						<div class="sliderr"></div>
+						<div class="coupling a-rate">
+							<div class="thread"></div>
+							<div class="text">COUPLING</div>
+						</div>
+						<div class="sliderr"></div>
+						<div class="fat a-rate">
+							<div class="wide"><div class="rate">A</div></div>
+							<div class="text">FAT</div>
+						</div>
+						<div class="sliderr"></div>
+					</div>
+					<!--dynamicwave fin-->
+					<div name="SecuFS" class="list-item">
+						<div class="pollution b-circle">
+							<div class="rotation-circle"><div class="text">B</div></div>
+						</div>
+						<div class="slider"></div>
+						<div class="info">
+							<div class="project-name">SecuFS</div>
+							<div class="project-date">Jun 2011 - Aug 2011 <span class="very-old">(1 year ago)</span></div>
+						</div>
+						<div class="basicrule right b-rate">
+							<div class="box">
+								<div class="c1"></div><div class="c2"></div><div class="c3"></div><div class="c4"></div>
+							</div>
+							<div class="rate">B</div>
+							<div class="text">BASIC RULE</div>
+						</div>
+						<div class="sliderr"></div>
+						<div class="naming f-rate">
+							<div class="donut"><div class="rate">F</div></div>
+							<div class="text">NAMING</div>
+						</div>
+						<div class="sliderr"></div>
+						<div class="coupling b-rate">
+							<div class="thread"></div>
+							<div class="text">COUPLING</div>
+						</div>
+						<div class="sliderr"></div>
+						<div class="fat c-rate">
+							<div class="wide"><div class="rate">C</div></div>
+							<div class="text">FAT</div>
+						</div>
+						<div class="sliderr"></div>
+					</div>
+					<!--secufs fin-->
+				</div>
+				<!--project-list fin-->
+			</div>
+			<!--main fin-->
+		</div>
+		<!--content fin-->
+	</div>
+	<!--content-container fin-->
+</div>
+
+</body>
+</html>
