@@ -343,9 +343,12 @@ body {
 
 /* Content */
 #content {
-	float: right;
+	width: 100%;
 	min-width: 817px;
 	height: 100%;
+}
+#content-body {
+	margin-left: 143px;
 }
 
 #content-line { width: 100%; height: 7px; }
@@ -884,3 +887,49 @@ div.agraph div.bar {
 #container.svg			#project-list .list-item .fat.f-rate .wide { background: url(../images/fat_f.svg) no-repeat; }
 #container				#project-list .list-item .fat.f-rate .wide,
 #container.decelerate	#project-list .list-item .fat.f-rate .wide { background: url(../images/fat_f.png) no-repeat; }
+
+#popup-info {
+	position: absolute;
+	display: none;
+	left: 0px;
+	top: 0px;
+
+	opacity: 0.0;
+	filter: alpha(opacity=0);
+    -ms-filter:"alpha(opacity=0)";
+}
+#popup-tri {
+	margin-left: 120px;	
+	width: 0;
+	height: 0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid #373737;
+}
+#popup-body {
+	padding: 10px;
+	width: 150px;
+	min-height: 60px;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-o-border-radius: 4px;
+	background-color: #373737;
+}
+#popup-title {
+	margin-left: 4px;
+	font: 800 16px "Helvetica";
+	color: #f2f2ea;
+}
+#popup-line {
+	margin-top: 2px;
+	height: 1px;
+	background-color: #de6262;
+}
+#popup-content {
+	margin-top: 4px;
+	margin-left: 4px;
+	font-size: 11px;
+	font-family: 돋움, Dotum;
+	color: #acacac;
+}
